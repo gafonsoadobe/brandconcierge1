@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PORTO SEGURO</title>
+	<script src="styleConfigurations.js"></script>
+	<script>
+		!function (n, o) {
+      o.forEach(function (o) {
+        n[o] || ((n.__alloyNS = n.__alloyNS ||
+          []).push(o), n[o] = function () {
+            var u = arguments; return new Promise(
+              function (i, l) { n[o].q.push([i, l, u]) })
+          }, n[o].q = [])
+      })
+    }
+      (window, ["alloy"]);
+	</script>
+	<style>
+		.bc-card__image {
+			background-size: contain !important;
+			background-repeat: no-repeat !important;
+		}
+
+	</style>
+
+  <script src="https://cdn1.adoberesources.net/alloy/2.32.0/alloy.min.js"></script>
+  <script src="https://experience.adobe.net/solutions/experience-platform-brand-concierge-web-agent/static-assets/main.js"></script>
+
+
+	<script>
+		alloy("configure", {
+      defaultConsent: "in",
+      edgeDomain: "edge.adobedc.net",
+      edgeBasePath: "ee",
+      datastreamId: "ce056d91-c085-4a3f-9492-5d1c4d78e88f",
+      orgId: "B4A122FD69126FF30A495FB9@AdobeOrg",
+      debugEnabled: true,
+      idMigrationEnabled: false,
+      thirdPartyCookiesEnabled: false,
+      prehidingStyle: ".personalization-container { opacity: 0 !important }"
+    });
+
+    alloy("sendEvent", {});
+	</script>
+</head>
+
+<body style="height: 100vh; width: 100vw; margin: 0; padding: 0;">
+	<div id="brand-concierge-mount"></div>
+  <script>
+    (function () {
+      function showError(error) {
+        console.error("Brand Concierge bootstrap error:", error);
+        var mount = document.getElementById("brand-concierge-mount");
+        mount.innerHTML = "<div style=\"padding:24px;font-family:Arial,sans-serif;color:#b00020;background:#fff5f5;border:1px solid #f0b8b8;margin:24px;border-radius:8px\"><strong>Brand Concierge não carregou.</strong><br><small>Abra o Console do navegador (F12) para ver o erro detalhado.</small></div>";
+      }
+
+      if (!window.styleConfigurations) {
+        showError(new Error("window.styleConfigurations não foi carregado. Verifique se styleConfigurations.js está na mesma pasta."));
+        return;
+      }
+
+      if (!window.adobe || !window.adobe.concierge || typeof window.adobe.concierge.bootstrap !== "function") {
+        showError(new Error("Adobe Brand Concierge main.js não carregou ou bootstrap não está disponível."));
+        return;
+      }
+
+      try {
+        window.adobe.concierge.bootstrap({
+          instanceName: "alloy",
+          stylingConfigurations: window.styleConfigurations,
+          selector: "#brand-concierge-mount",
+          stickySession: false,
+          onEvent: function (event) {
+            console.log("Brand Concierge event:", event);
+          }
+        });
+      } catch (error) {
+        showError(error);
+      }
+    })();
+  </script>
+</body>
+
+</html>
